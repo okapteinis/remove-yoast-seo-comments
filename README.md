@@ -4,7 +4,7 @@ Remove Yoast SEO Comments - independent development repository.
 
 ## About This Repository
 
-This is an independent development repository for the Remove Yoast SEO Comments plugin (version 3.1).
+This is an independent development repository for the Remove Yoast SEO Comments plugin (version 3.2).
 
 **Original Plugin:** [Remove Yoast SEO Comments](https://wordpress.org/plugins/remove-yoast-seo-comments/)
 **Original Author:** Mitch (lowest)
@@ -32,15 +32,17 @@ This is a must-have plugin if you have Yoast SEO installed and want cleaner HTML
 
 ## Requirements
 
-- WordPress 1.2.0 or higher
-- PHP 5.6 or higher
+- WordPress 4.0 or higher
+- PHP 8.0 or higher
+- **PHP 8.4 compatible** - Fully tested with PHP 8.4.1
 - **Yoast SEO plugin** (required)
 
 ## Version Information
 
-- **Current Version:** 3.1
-- **Tested up to:** WordPress 4.9.1
-- **Compatible with:** All Yoast SEO versions (tested up to Yoast SEO 4.9)
+- **Current Version:** 3.2
+- **Tested up to:** WordPress 6.7 (beta support for PHP 8.4)
+- **PHP Version:** 8.0+ (fully compatible with PHP 8.4.1)
+- **Compatible with:** All Yoast SEO versions
 
 ## Installation
 

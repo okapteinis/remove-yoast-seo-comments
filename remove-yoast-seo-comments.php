@@ -1,16 +1,20 @@
 <?php
+declare(strict_types=1);
+
 /*
  * Plugin Name: Remove Yoast SEO Comments
  * Plugin URI: https://wordpress.org/plugins/remove-yoast-seo-comments/
  * Description: Removes the Yoast SEO advertisement HTML comments from your front-end source code.
- * Version: 3.1
+ * Version: 3.2
+ * Requires PHP: 8.0
+ * Requires at least: 4.0
+ * Tested up to: 6.7
  * Author: Mitch
  * Author URI: https://profiles.wordpress.org/lowest
  * License: GPL-2.0+
  * Text Domain: rysc
  * Domain Path:
  * Network:
- * License: GPL-2.0+
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,16 +34,16 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 class RYSC {
-	private $version = '3.1';
-	private $debug_marker_removed = false;
-	private $head_marker_removed = false;
-	private $backup_plan_active = false;
-	
+	private string $version = '3.2';
+	private bool $debug_marker_removed = false;
+	private bool $head_marker_removed = false;
+	private bool $backup_plan_active = false;
+
 	public function __construct() {
 		add_action( 'init', array( $this, 'bundle' ), 1);
 	}
 	
-	public function bundle() {
+	public function bundle(): void {
 		if(defined( 'WPSEO_VERSION' )) {
 			$debug_marker = ( version_compare( WPSEO_VERSION, '4.4', '>=' ) ) ? 'debug_mark' : 'debug_marker';
 
@@ -79,7 +83,7 @@ class RYSC {
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_links' ) );
 	}
 	
-	public function operating_status() {
+	public function operating_status(): int {
 		if($this->debug_marker_removed && $this->head_marker_removed) {
 			return 1;
 		} elseif(!$this->debug_marker_removed && $this->head_marker_removed || $this->debug_marker_removed && !$this->head_marker_removed) {
@@ -89,11 +93,11 @@ class RYSC {
 		}
 	}
 	
-	public function dash_widget() {
+	public function dash_widget(): void {
 		wp_add_dashboard_widget( 'dashboard_widget', 'Remove Yoast SEO Comments', array( $this, 'dash_widget_content' ) );
 	}
 	
-	public function dash_widget_content() {
+	public function dash_widget_content(): void {
 		if($this->operating_status() == 1) {
 			$status = '<span style="color:#04B404;font-weight:bold">Fully supported</span>';
 			$content = '<p>Version ' . WPSEO_VERSION . ' of Yoast SEO is fully supported by RYSC ' . $this->version . '. The HTML comments have been removed from your front-end source code.</p>';
@@ -110,7 +114,7 @@ class RYSC {
 	}
 	
 	// compatible solution for everything below 5.8
-	public function rewrite() {
+	public function rewrite(): void {
 		$rewrite = new ReflectionMethod( 'WPSEO_Frontend', 'head' );
 		
 		$filename = $rewrite->getFileName();
@@ -126,18 +130,18 @@ class RYSC {
 	}
 	
 	// temp solution for all installations on 5.8, and also the backup solution in the future
-	public function buffer_header() {
+	public function buffer_header(): void {
 		ob_start(function ($o) {
 			return preg_replace('/\n?<.*?yoast.*?>/mi','',$o);
 		});
 	}
 	
-	public function buffer_head() {
+	public function buffer_head(): void {
 		ob_end_flush();
 	}
 	
 	// add plugin links to plugin page
-	public function plugin_links( $link ) {
+	public function plugin_links( array $link ): array {
 		$plugin_links = array_merge( $link, array('<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2VYPRGME8QELC" target="_blank" rel="noopener noreferrer">' . __('Donate') . '</a>') );
 		
 		return $plugin_links;
