@@ -12,8 +12,8 @@
 
 This work represents a collaborative effort between:
 
-- **Ojārs Kapteinis** (ojarskapteinis.lv) - Human developer, project maintainer
-- **Claude AI Assistant** (codeanthropic.com) - AI development assistant
+- **Ojārs Kapteinis** (ojars@kapteinis.lv) - Human developer, project maintainer
+- **Claude AI Assistant** (code@claude.ai) - AI development assistant
 
 ---
 
@@ -258,7 +258,7 @@ Before deploying to production, the following tests should be performed:
 ## Contact and Support
 
 For questions about these modifications:
-- **Human Developer:** Ojārs Kapteinis (ojarskapteinis.lv)
+- **Human Developer:** Ojārs Kapteinis (ojars@kapteinis.lv)
 
 For the original plugin:
 - **WordPress.org:** https://wordpress.org/plugins/remove-yoast-seo-comments/
